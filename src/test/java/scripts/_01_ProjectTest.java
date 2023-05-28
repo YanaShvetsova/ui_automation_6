@@ -17,6 +17,13 @@ public class _01_ProjectTest extends Base{
         driver.get("https://techglobal-training.com/frontend/project-1");
     }
 
+    /**
+     * Navigate to https://techglobal-training.com/frontend/project-1
+     * Validate the heading is “Contact Us”
+     * Validate the address is “2860 S River Rd Suite 350, Des Plaines IL 60018”
+     * Validate the email is “info@techglobalschool.com"
+     * Validate the phone number is “(773) 257-3010”
+     */
     @Test (priority = 1)
     public void validateHeading(){
         WebElement heading = driver.findElement(By.cssSelector(".is-size-2"));
@@ -35,6 +42,13 @@ public class _01_ProjectTest extends Base{
         Assert.assertEquals(phoneNumber.getText(), "(773) 257-3010");
     }
 
+    /**
+     * Navigate to https://techglobal-training.com/frontend/project-1
+     * Validate that the Full name input box is displayed
+     * Validate that the Full name input box is required
+     * Validate that the label of the Full name input box is “Full name”
+     * Validate that the placeholder of the Full name input box is “Enter your name”
+     */
     @Test (priority = 2)
     public void validateFullNameInputBox(){
         WebElement fullNameInputBox = driver.findElement(By.xpath("(//input[@class='input'])[1]"));
@@ -45,11 +59,20 @@ public class _01_ProjectTest extends Base{
         boolean isRequired = fullNameInputBox.getAttribute("required") != null;
         Assert.assertTrue(isRequired);
         Assert.assertTrue(labelFullName.isDisplayed());
-       // Assert.assertEquals(labelFullName.getText(), "Full name");  //Bug-1
+        Assert.assertEquals(labelFullName.getText(), "Full name");  //Bug-1
         Assert.assertTrue(fullNamePlaceholder.isDisplayed());
-       // Assert.assertEquals(fullNamePlaceholder.getAttribute("placeholder"), "Enter your name");  //Bug-2
+        Assert.assertEquals(fullNamePlaceholder.getAttribute("placeholder"), "Enter your name");  //Bug-2
     }
 
+    /**
+     * Navigate to https://techglobal-training.com/frontend/project-1
+     * Validate the label is “Gender”
+     * Validate that the Gender is required
+     * Validate the options are “Female”, “Male” and “Prefer not to disclose”
+     * Validate the options are clickable and not selected
+     * Click on the “Male” option and validate it is selected while the others are not selected
+     * Click on the “Female” option and validate it is selected while the others are not selected
+     */
     @Test (priority = 3)
     public void validateGenderRadioButton() {
         WebElement labelGender = driver.findElement(By.xpath("(//label[@class='label'])[2]"));
@@ -58,18 +81,18 @@ public class _01_ProjectTest extends Base{
         List<WebElement> buttonsSelected = driver.findElements(By.cssSelector("input[name='question']"));
 
         Assert.assertTrue(labelGender.isDisplayed());
-        //Assert.assertEquals(labelGender.getText(),"Gender"); //Bug-3
+        Assert.assertEquals(labelGender.getText(),"Gender"); //Bug-3
         boolean isRequired = radioButtonMale.getAttribute("required") != null;
         Assert.assertTrue(isRequired);
         String[] expectedText = {"Female", "Male", "Prefer not to disclose"};   //Bug-4
 
         //checking if the radio buttons displayed, text, enabled --- LABEL   and if its not selected --->INPUT
-      /*  for (int i = 0; i < expectedText.length; i++) {
+        for (int i = 0; i < expectedText.length; i++) {
             Assert.assertTrue(buttonsExist.get(i).isDisplayed());
             Assert.assertEquals(buttonsExist.get(i).getText(), expectedText[i]);
             Assert.assertTrue(buttonsExist.get(i).isEnabled());
             Assert.assertFalse(buttonsSelected.get(i).isSelected());
-        }*/
+        }
 
         //click Male  and check if its selected using INPUT
         buttonsSelected.get(1).click();
@@ -90,6 +113,14 @@ public class _01_ProjectTest extends Base{
             Assert.assertFalse(buttonsSelected.get(i).isSelected());
         }
     }
+
+    /**
+     * Navigate to https://techglobal-training.com/frontend/project-1
+     * Validate that the Address input box is displayed
+     * Validate that the Address input box is not required
+     * Validate that the label of the Address input box is “Address”
+     * Validate that the placeholder of the Address input box is “Enter your address*”
+     */
     @Test (priority = 4)
     public void validateAddressInputBox(){
     WebElement addressInputBox = driver.findElement(By.xpath("(//input[@class='input'])[2]"));
@@ -98,11 +129,18 @@ public class _01_ProjectTest extends Base{
 
     Assert.assertTrue(addressInputBox.isDisplayed());
     boolean isRequired = addressPlaceholder.getAttribute("required") != null;
-    // Assert.assertFalse(isRequired);   // Bug-5
+    Assert.assertFalse(isRequired);
     Assert.assertEquals(labelAddress.getText(), "Address");
-    //Assert.assertEquals(addressPlaceholder.getAttribute("placeholder"), "Enter your address*");   //Bug-6
+    Assert.assertEquals(addressPlaceholder.getAttribute("placeholder"), "Enter your address*");   //Bug-5
     }
 
+    /**
+     * Navigate to https://techglobal-training.com/frontend/project-1
+     * Validate that the Email input box is displayed
+     * Validate that the Email input box is required
+     * Validate that the label of the Email input box is “Email”
+     * Validate that the placeholder of the Email input box is “Enter your email”
+     */
     @Test (priority = 5)
     public void validateEmailInputBox() {
         WebElement emailInputBox = driver.findElement(By.xpath("(//input[@class='input'])[3]"));
@@ -112,10 +150,17 @@ public class _01_ProjectTest extends Base{
         Assert.assertTrue(emailInputBox.isDisplayed());
         boolean isRequired = emailPlaceholder.getAttribute("required") != null;
         Assert.assertTrue(isRequired);
-        //Assert.assertEquals(labelEmail.getText(), "Email");  //Bug-7
+        Assert.assertEquals(labelEmail.getText(), "Email");  //Bug-6
         Assert.assertEquals(emailPlaceholder.getAttribute("placeholder"), "Enter your email");
     }
 
+    /**
+     * Navigate to https://techglobal-training.com/frontend/project-1
+     * Validate that the Phone input box is displayed
+     * Validate that the Phone input box is not required
+     * Validate that the label of the Phone input box is “Phone”
+     * Validate that the placeholder of the Address input box is “Enter your phone number”
+     */
     @Test (priority = 6)
     public void validatePhoneInputBox(){
         WebElement phoneInputBox = driver.findElement(By.xpath("(//input[@class='input'])[4]"));
@@ -129,6 +174,13 @@ public class _01_ProjectTest extends Base{
         Assert.assertEquals(phonePlaceholder.getAttribute("placeholder"), "Enter your phone number");
     }
 
+    /**
+     * Navigate to https://techglobal-training.com/frontend/project-1
+     * Validate that the Message text area is displayed
+     * Validate that the Message text area is not required
+     * Validate that the label of the Message text area is “Message”
+     * Validate that the placeholder of the Message text area is “Type your message here…”
+     */
     @Test (priority = 7)
     public void validateMessageTextArea(){
         WebElement messageTextArea = driver.findElement(By.cssSelector("textarea[class='textarea']"));
@@ -141,7 +193,14 @@ public class _01_ProjectTest extends Base{
         Assert.assertEquals(labelMessage.getText(), "Message");
         Assert.assertEquals(messagePlaceholder.getAttribute("placeholder"), "Type your message here..."); //different dots?
     }
-
+    /**
+     *Navigate to https://techglobal-training.com/frontend/project-1
+     * Validate the label is “I give my consent to be contacted.”
+     * Validate that the Consent checkbox is required
+     * Validate that the Consent checkbox is clickable
+     * Click on the “I give my consent to be contacted.” checkbox and validate it is selected
+     * Click on the “I give my consent to be contacted.” checkbox again and validate it is not selected
+     */
     @Test (priority = 8)
     public void validateConsentCheckbox(){
         WebElement labelConsentCheckbox = driver.findElement(By.cssSelector("label[class='checkbox']"));
@@ -157,6 +216,12 @@ public class _01_ProjectTest extends Base{
         Assert.assertFalse(consentCheckbox.isSelected());
     }
 
+    /**
+     * Navigate to https://techglobal-training.com/frontend/project-1
+     * Validate the “SUBMIT” button is displayed
+     * Validate the “SUBMIT” button is clickable
+     * Validate that the button text is “SUBMIT”
+     */
     @Test (priority = 9)
     public void validateSubmitButton(){
         WebElement submitButton = driver.findElement(By.cssSelector("button[type='submit']"));
@@ -166,6 +231,18 @@ public class _01_ProjectTest extends Base{
         Assert.assertEquals(submitButton.getText(), "SUBMIT");
     }
 
+    /**
+     * Navigate to https://techglobal-training.com/frontend/project-1
+     * Enter a first name
+     * Select a gender
+     * Enter an address
+     * Enter an email
+     * Enter a phone number
+     * Enter a message
+     * Select the “I give my consent to be contacted.” checkbox
+     * Click on the “SUBMIT” button
+     * Validate the form message “Thanks for submitting!” is displayed under the “SUBMIT” button
+     */
     @Test (priority = 10)
     public void validateFormSubmission(){
         WebElement fullNameInputBox = driver.findElement(By.xpath("(//input[@class='input'])[1]"));
@@ -175,7 +252,7 @@ public class _01_ProjectTest extends Base{
         WebElement phoneInputBox = driver.findElement(By.xpath("(//input[@class='input'])[4]"));
         WebElement messageTextArea = driver.findElement(By.cssSelector("textarea[class='textarea']"));
         WebElement consentCheckbox = driver.findElement(By.cssSelector("input[type='checkbox']"));
-        WebElement submitButton = driver.findElement(By.cssSelector("button[type='submit']"));
+        WebElement submitButton = driver.findElement(By.id("button[type='submit']"));
 
         fullNameInputBox.sendKeys("Yana");
         femaleRadioButton.click();
@@ -185,7 +262,7 @@ public class _01_ProjectTest extends Base{
         messageTextArea.sendKeys("Hello TechGlobal!");
         consentCheckbox.click();
         submitButton.click();
-        Waiter.pause(2);
+        //Waiter.pause(2);
         WebElement submissionMessage = driver.findElement(By.cssSelector("strong[class='mt-5']"));
         Assert.assertEquals(submissionMessage.getText(), "Thanks for submitting!");
     }
