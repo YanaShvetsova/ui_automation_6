@@ -12,20 +12,21 @@ import java.util.concurrent.TimeUnit;
 
 public class _02_AppleTest {
     /*
-    validateTitleAndURL
-Go to https://www.apple.com/
-Validate its title is apple
-Validate its URL is https://www.apple.com/
+    Go to https://www.apple.com/
+    Validate its title is apple
+    Validate its URL is https://www.apple.com/
      */
-    public static WebDriver driver;
+
+    public static WebDriver driver; // declaration
 
     @BeforeMethod
-    public void setup(){
-        WebDriverManager.chromedriver().setup(); // Set up Chrome driver
+    public void setUp(){
+        WebDriverManager.chromedriver().setup();
 
-        driver = new ChromeDriver(); // Launch a Chrome driver
-        driver.manage().window().maximize(); // Maximizes the Chrome window
-        driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS); // implicit wait
+        driver = new ChromeDriver(); // initialization
+
+        driver.manage().window().maximize();
+        driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 
         driver.get("https://www.apple.com/");
     }
@@ -37,12 +38,10 @@ Validate its URL is https://www.apple.com/
     }
 
     @Test
-    public void validateTitleAndURL() {
-        //Validation of title and URL
-        System.out.println("The title is = " + driver.getTitle()); // Apple
-        System.out.println("The current URL is =  "+ driver.getCurrentUrl()); // https://www.google.com/
-
+    public void validateTitleAndURL()  {
         Assert.assertEquals(driver.getTitle(), "Apple");
         Assert.assertEquals(driver.getCurrentUrl(), "https://www.apple.com/");
     }
+
+
 }
