@@ -50,7 +50,7 @@ public class _13_IFrameTest extends Base {
 
         name.sendKeys("John");
         lastName.sendKeys("Doe");
-        submitButton.click();
+        submitButton.submit();
 
         //driver.switchTo().parentFrame(); //parentFrame
         driver.switchTo().defaultContent(); //main HTML frame

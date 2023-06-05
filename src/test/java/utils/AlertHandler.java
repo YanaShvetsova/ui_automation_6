@@ -1,5 +1,7 @@
 package utils;
 
+import org.openqa.selenium.WebElement;
+
 public class AlertHandler {
 
     public static void acceptAlert(){

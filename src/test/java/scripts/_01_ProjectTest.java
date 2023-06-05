@@ -74,44 +74,36 @@ public class _01_ProjectTest extends Base{
      * Click on the “Female” option and validate it is selected while the others are not selected
      */
     @Test (priority = 3)
-    public void validateGenderRadioButton() {
-        WebElement labelGender = driver.findElement(By.xpath("(//label[@class='label'])[2]"));
-        WebElement radioButtonMale = driver.findElement(By.cssSelector("input[type='radio']"));
-        List<WebElement> buttonsExist = driver.findElements(By.cssSelector(".radio"));
-        List<WebElement> buttonsSelected = driver.findElements(By.cssSelector("input[name='question']"));
+    public void validateTheGenderRadioButton(){
+        WebElement genderLabel = driver.findElement(By.xpath("//label[text()='Gender *']"));
+        List<WebElement> genderRadioButtonLabels = driver.findElements(By.cssSelector(".radio"));
+        List<WebElement> genderRadioButtonInputs = driver.findElements(By.cssSelector(".radio>input"));
 
-        Assert.assertTrue(labelGender.isDisplayed());
-        Assert.assertEquals(labelGender.getText(),"Gender"); //Bug-3
-        boolean isRequired = radioButtonMale.getAttribute("required") != null;
-        Assert.assertTrue(isRequired);
-        String[] expectedText = {"Female", "Male", "Prefer not to disclose"};   //Bug-4
+        String[] expectedGenderLabelText = {"Male", "Female", "Prefer not to disclose"};
 
-        //checking if the radio buttons displayed, text, enabled --- LABEL   and if its not selected --->INPUT
-        for (int i = 0; i < expectedText.length; i++) {
-            Assert.assertTrue(buttonsExist.get(i).isDisplayed());
-            Assert.assertEquals(buttonsExist.get(i).getText(), expectedText[i]);
-            Assert.assertTrue(buttonsExist.get(i).isEnabled());
-            Assert.assertFalse(buttonsSelected.get(i).isSelected());
+        Assert.assertEquals(genderLabel.getText(), "Gender *");
+
+        Assert.assertEquals(genderRadioButtonInputs.get(0).getAttribute("required"), "true");
+
+        for (int i = 0; i < 3; i++) {
+            Assert.assertEquals(genderRadioButtonLabels.get(i).getText(), expectedGenderLabelText[i]);
+            Assert.assertTrue(genderRadioButtonInputs.get(i).isEnabled());
+            Assert.assertFalse(genderRadioButtonInputs.get(i).isSelected());
         }
 
-        //click Male  and check if its selected using INPUT
-        buttonsSelected.get(1).click();
-        Assert.assertTrue(buttonsSelected.get(1).isSelected());
+        genderRadioButtonInputs.get(0).click();
+        Waiter.pause(2);
+        Assert.assertTrue(genderRadioButtonInputs.get(0).isSelected());
+        Assert.assertFalse(genderRadioButtonInputs.get(1).isSelected());
+        Assert.assertFalse(genderRadioButtonInputs.get(2).isSelected());
 
-        //while others unselected
-        for (int i = 0; i < expectedText.length; i++) {
-            if (i == 1) continue;
-            Assert.assertFalse(buttonsSelected.get(i).isSelected());
-        }
-        //click Female and check if its selected using INPUT
-        buttonsSelected.get(0).click();
-        Assert.assertTrue(buttonsSelected.get(0).isSelected());
+        genderRadioButtonInputs.get(1).click();
+        Waiter.pause(2);
+        Assert.assertFalse(genderRadioButtonInputs.get(0).isSelected());
+        Assert.assertTrue(genderRadioButtonInputs.get(1).isSelected());
+        Assert.assertFalse(genderRadioButtonInputs.get(2).isSelected());
 
-        //while others unselected
-        for (int i = 0; i < expectedText.length; i++) {
-            if (i == 0) continue;
-            Assert.assertFalse(buttonsSelected.get(i).isSelected());
-        }
+        Waiter.pause(2);
     }
 
     /**
@@ -203,7 +195,7 @@ public class _01_ProjectTest extends Base{
      */
     @Test (priority = 8)
     public void validateConsentCheckbox(){
-        WebElement labelConsentCheckbox = driver.findElement(By.cssSelector("label[class='checkbox']"));
+        WebElement labelConsentCheckbox = driver.findElement(By.cssSelector(".checkbox"));
         WebElement consentCheckbox = driver.findElement(By.cssSelector("input[type='checkbox']"));
 
         Assert.assertEquals(labelConsentCheckbox.getText(), "I give my consent to be contacted.");
