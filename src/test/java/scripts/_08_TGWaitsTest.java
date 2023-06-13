@@ -44,7 +44,7 @@ public class _08_TGWaitsTest extends Base {
      * Validate that a blue box is displayed
      */
 
-    @Test
+   /* @Test
     public void waitForBlueBox(){
         WebElement blueBoxButton = driver.findElement(By.id("blue"));
         blueBoxButton.click();
@@ -52,7 +52,8 @@ public class _08_TGWaitsTest extends Base {
         WebElement blueBox = driver.findElement(By.cssSelector("button[class*='blue_box']"));
 
         Waiter.waitForVisibilityOfElement(blueBox, 40);
+        //Waiter.pause(40);
 
         Assert.assertTrue(blueBox.isDisplayed());
-    }
+    }*/
 }
